@@ -70,7 +70,7 @@ class MealActivity : AppCompatActivity() {
             .into(binding.imgMealDetail)
         binding.collapsingToolbar.title = mealName
         binding.collapsingToolbar.setCollapsedTitleTextColor(resources.getColor(R.color.white))
-        binding.collapsingToolbar.setExpandedTitleColor(resources.getColor(R.color.dark_pink))
+        binding.collapsingToolbar.setExpandedTitleColor(resources.getColor(R.color.oceanblue))
     }
 
     private fun getMealInformationFromIntent() {

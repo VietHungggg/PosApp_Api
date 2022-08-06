@@ -24,7 +24,7 @@ class MealViewModel() : ViewModel() {
             }
 
             override fun onFailure(call: Call<MealList>, t: Throwable) {
-                Log.d("MealActitvity", t.message.toString())
+                Log.d("MealActivity", t.message.toString())
             }
         })
     }

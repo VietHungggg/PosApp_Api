@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_green"
     tools:context=".activities.MainActivity">
 
     <fragment
@@ -15,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btm_nav"
         app:navGraph="@navigation/nav_graph"
-        android:name="androidx.navigation.fragment.NavHostFragment"/>
+        android:name="androidx.navigation.fragment.NavHostFragment" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btm_nav"
@@ -24,7 +25,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/btm_menu">
+        app:menu="@menu/btm_menu"
+        >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 

@@ -42,7 +42,7 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_search"/>
+            android:src="@drawable/ic_search" />
 
 
     </LinearLayout>
@@ -132,7 +132,8 @@
             android:id="@+id/rec_view_categories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"/>
+            android:scrollbars="none"
+            android:background="@color/lemon_yellow"/>
 
     </androidx.cardview.widget.CardView>
 
