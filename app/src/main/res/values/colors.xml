@@ -10,4 +10,6 @@
 <!--    add color  -->
     <color name="g_black">#33405f</color>
     <color name="space_black">#1B2430</color>
+    <color name="lotus_pink">#FFB4B4</color>
+    <color name="dark_pink">#F806CC</color>
 </resources>
