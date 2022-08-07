@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.posapp.fragments.favoritesFragment"
+        android:name="com.example.posapp.fragments.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.posapp.fragments.CategoriesFragment"
+        android:name="com.example.posapp.fragments.CartFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/cart_meals" />
 </navigation>
