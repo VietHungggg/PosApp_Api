@@ -13,6 +13,9 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
 
     private var categoriesList = ArrayList<Category>()
 
+    //    Category Click Adapter
+    var onItemClick: ((Category) -> Unit)? = null
+
     fun setCategoriesList(categoriesList: List<Category>) {
         this.categoriesList = categoriesList as ArrayList<Category>
         notifyDataSetChanged()
@@ -34,6 +37,11 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
             .load(categoriesList[position].strCategoryThumb)
             .into(holder.binding.imgCategory)
         holder.binding.tvCategoryName.text = categoriesList[position].strCategory
+
+    //        Category Click BinViewHolder
+        holder.itemView.setOnClickListener {
+            onItemClick!!.invoke(categoriesList[position])
+        }
     }
 
     override fun getItemCount(): Int {

@@ -4,16 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_area.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_cart.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_category.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_favorites.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.105" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.19444444444444445" />
+        <entry key="app/src/main/res/layout/activity_category_meals.xml" value="0.23369565217391305" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21822418212890626" />
         <entry key="app/src/main/res/layout/activity_meal.xml" value="0.23867753623188406" />
+        <entry key="app/src/main/res/layout/cart_meals.xml" value="0.22192028985507245" />
+        <entry key="app/src/main/res/layout/category_click_item.xml" value="0.14488348530901723" />
         <entry key="app/src/main/res/layout/category_items.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/category_meals_item.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/meals_item.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/popular_items.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/menu/btm_menu.xml" value="0.1890426635742188" />
       </map>
