@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.posapp.api.*
 import com.example.posapp.db.MealDatabase
 import com.example.posapp.retrofit.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,6 +73,20 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
         })
     }
 
+    // Delete meal from Favorite
+
+    fun deleteMeal(meal: Meal) {
+        viewModelScope.launch {
+            mealDatabase.mealDao().delete(meal)
+        }
+    }
+    fun insertMeal(meal: Meal) {
+        viewModelScope.launch {
+            mealDatabase.mealDao().update(meal)
+        }
+    }
+
+    // Observe HomeViewModel
     fun observeRandomMealLivedata(): LiveData<Meal> {
         return randomMealLiveData
     }
