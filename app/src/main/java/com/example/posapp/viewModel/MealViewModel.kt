@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.posapp.api.Meal
 import com.example.posapp.api.MealList
+import com.example.posapp.api.MealToCart
+import com.example.posapp.api.MealToCartList
 import com.example.posapp.db.MealDatabase
 import com.example.posapp.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
@@ -41,6 +43,25 @@ class MealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
     fun insertMeal(meal: Meal) {
         viewModelScope.launch {
             mealDatabase.mealDao().update(meal)
+        }
+    }
+
+    fun deleteMeal(meal: Meal) {
+        viewModelScope.launch {
+            mealDatabase.mealDao().delete(meal)
+        }
+    }
+
+    //    Meal to Cart
+    fun insertMealToCart(mealToCart: MealToCart) {
+        viewModelScope.launch {
+            mealDatabase.mealToCartDao().update(mealToCart)
+        }
+    }
+
+    fun deleteMealToCart(mealToCart: MealToCart) {
+        viewModelScope.launch {
+            mealDatabase.mealToCartDao().delete(mealToCart)
         }
     }
 

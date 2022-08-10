@@ -50,13 +50,23 @@ class MealActivity : AppCompatActivity() {
         //Click function
         onYoutubeImageClick()
         onFavoriteClick()
+        onCartClick()
+    }
+
+    private fun onCartClick() {
+        binding.btnChoiceToCart.setOnClickListener {
+            mealToSave?.let {
+                mealMvvm.insertMeal(it)
+                Toast.makeText(this, "Meal save to Cart!!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onFavoriteClick() {
         binding.btnAddToFav.setOnClickListener {
             mealToSave?.let {
                 mealMvvm.insertMeal(it)
-                Toast.makeText(this, "Meal save to favorites!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Meal save to Favorites!!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -68,7 +78,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    //    Create var  click to btnAddToFav
+    //    Create var  click to btn favorite and cart
     private var mealToSave: Meal? = null
 
     private fun observerMealDetailsLiveData() {
