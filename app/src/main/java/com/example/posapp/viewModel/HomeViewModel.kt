@@ -20,6 +20,7 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
+    private var cartMealsLiveData = mealDatabase.mealDao().getAllMeals()
 
     //    Random meal image
     fun getRandomMeal() {
@@ -103,4 +104,7 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
         return favoritesMealsLiveData
     }
 
+    fun observeCartMealsLiveData(): LiveData<List<Meal>> {
+        return cartMealsLiveData
+    }
 }

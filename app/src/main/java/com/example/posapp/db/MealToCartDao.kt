@@ -7,16 +7,15 @@ import com.example.posapp.api.MealToCart
 
 
 @Dao
-interface MealDao {
+interface MealToCartDao {
     @Insert (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(meal: Meal)
+    suspend fun update(mealToCart: MealToCart)
 
     @Delete
-    suspend fun delete (meal: Meal)
+    suspend fun delete (mealToCart: MealToCart)
 
 //    Save data to favorites
     @Query ("SELECT * FROM mealsInformation")
-    fun getAllMeals() : LiveData<List<Meal>>
-
+    fun getAllMeals() : LiveData<List<MealToCart>>
 
 }
