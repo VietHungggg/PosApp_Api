@@ -10,8 +10,11 @@
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.105" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/layout/activity_category_meals.xml" value="0.23369565217391305" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.20693511962890626" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21822418212890626" />
         <entry key="app/src/main/res/layout/activity_meal.xml" value="0.23867753623188406" />
+        <entry key="app/src/main/res/layout/activity_singup.xml" value="0.16515808105468752" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.14855072463768115" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/cart_meals.xml" value="0.22192028985507245" />
         <entry key="app/src/main/res/layout/category_click_item.xml" value="0.14488348530901723" />
@@ -21,6 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_start.xml" value="0.13703703703703704" />
         <entry key="app/src/main/res/layout/meals_item.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/popular_items.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/menu/btm_menu.xml" value="0.1890426635742188" />
