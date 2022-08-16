@@ -7,15 +7,22 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.posapp.api.Meal
 import com.example.posapp.api.MealToCart
+import com.example.posapp.db.User.User
+import com.example.posapp.db.User.UserDao
 
 
-@Database(entities = [Meal::class,MealToCart::class], version = 2, exportSchema = false)
+@Database(
+    entities = [Meal::class, MealToCart::class, User::class],
+    version = 5,
+    exportSchema = false
+)
 @TypeConverters(MealTypeConverter::class)
 
 abstract class MealDatabase() : RoomDatabase() {
 
     abstract fun mealDao(): MealDao
-    abstract fun mealToCartDao() : MealToCartDao
+    abstract fun mealToCartDao(): MealToCartDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile
