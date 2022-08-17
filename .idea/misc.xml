@@ -8,7 +8,12 @@
         <entry key="app/src/main/res/drawable/ic_category.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_favorites.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.105" />
+        <entry key="app/src/main/res/drawable/ic_receipt.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_three_point.xml" value="0.106" />
+        <entry key="app/src/main/res/drawable/ic_user.xml" value="0.1225" />
+        <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.1225" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.19444444444444445" />
+        <entry key="app/src/main/res/layout/activity_admin_login_after.xml" value="0.27722772277227725" />
         <entry key="app/src/main/res/layout/activity_category_meals.xml" value="0.23369565217391305" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20693511962890626" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21822418212890626" />

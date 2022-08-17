@@ -15,8 +15,8 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
 
     val inputEmail = MutableLiveData<String>()
     val inputPassword = MutableLiveData<String>()
-
     var getUserLogin = MutableLiveData<Boolean>()
+    var getAdminLogin = MutableLiveData<Boolean>()
     var inputEmpty = MutableLiveData<String>()
     var inputError = MutableLiveData<String>()
 
@@ -24,6 +24,7 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
         inputPassword.value = ""
         inputEmail.value = ""
         getUserLogin.value = false
+        getAdminLogin.value = false
     }
 
     fun addUser(user: User) {
@@ -38,14 +39,18 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
         if (email.isEmpty() || password.isEmpty()) {
             inputEmpty.value = "Email or password is empty"
         } else {
-        userLogin(email, password)}
+            userLogin(email, password)
+        }
     }
 
     private fun userLogin(email: String, password: String) = runBlocking {
         val user = repository.userLogin(email, password)
-        if (user != null) {
+        val admin = repository.adminLogin(email, password)
+        if (admin != null) {
+            getAdminLogin.value = true
+        } else if (user != null) {
             getUserLogin.value = true
-        }else{
+        } else {
             inputError.value = "Email or password is wrong"
         }
     }

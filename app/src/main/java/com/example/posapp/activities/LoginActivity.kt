@@ -32,12 +32,20 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
+        viewModel.getAdminLogin.observe(this) {
+            if (it) {
+                val intent = Intent(this, AdminLoginAfterActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         viewModel.getUserLogin.observe(this) {
             if (it) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
         }
+
         viewModel.inputError.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }

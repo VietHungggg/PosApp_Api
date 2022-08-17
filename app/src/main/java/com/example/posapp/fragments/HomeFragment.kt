@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.posapp.activities.CategoryMealsActivity
 import com.example.posapp.activities.MainActivity
 import com.example.posapp.activities.MealActivity
+import com.example.posapp.activities.StartActivity
 import com.example.posapp.adapters.CategoriesAdapter
 import com.example.posapp.adapters.MostPopularAdapter
 import com.example.posapp.api.MealsByCategory
@@ -39,8 +40,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-    //        homeMvvm = ViewModelProviders.of(this)[HomeViewModel::class.java] (homeMvvm = viewModel)
-    //        ViewModel Factory
+        //        homeMvvm = ViewModelProviders.of(this)[HomeViewModel::class.java] (homeMvvm = viewModel)
+        //        ViewModel Factory
         viewModel = (activity as MainActivity).viewModel
 
         popularItemsAdapter = MostPopularAdapter()
@@ -78,6 +79,16 @@ class HomeFragment : Fragment() {
         viewModel.getCategories()
         observeCategoriesLiveData()
         onCategoryClick()
+
+        //      Home click
+        homeClick()
+    }
+
+    private fun homeClick() {
+        binding.tvHome.setOnClickListener {
+            val intent = Intent(activity, StartActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     //    Click into RandomMeal
