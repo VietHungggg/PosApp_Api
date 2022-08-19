@@ -18,4 +18,14 @@ interface MealDao {
     @Query("SELECT * FROM mealsInformation")
     fun getAllMeals(): LiveData<List<Meal>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateMealCart(meal: Meal)
+
+    @Delete
+    suspend fun deleteMealCart(meal: Meal)
+
+    //    Save data to favorites
+    @Query("SELECT * FROM mealsInformation")
+    fun getAllMealsCart(): LiveData<List<Meal>>
+
 }

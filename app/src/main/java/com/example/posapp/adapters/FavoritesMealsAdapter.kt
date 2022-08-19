@@ -13,7 +13,7 @@ import com.example.posapp.databinding.MealsItemBinding
 class FavoritesMealsAdapter : RecyclerView.Adapter<FavoritesMealsAdapter
 .FavoritesMealsAdapterViewHolder>() {
 
-    inner class FavoritesMealsAdapterViewHolder(val binding: MealsItemBinding) :
+    inner class FavoritesMealsAdapterViewHolder (val binding: MealsItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val diffUtil = object : DiffUtil.ItemCallback<Meal>() {
