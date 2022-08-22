@@ -23,10 +23,10 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
                 AdminCustomerFragment()
             }
             1 -> {
-                AdminReceiptFragment()
+                AdminMealFragment()
             }
             2 -> {
-                AdminMealFragment()
+                AdminReceiptFragment()
             }
             else -> {
                 Fragment()

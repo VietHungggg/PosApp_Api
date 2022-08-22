@@ -45,10 +45,10 @@ class AdminLoginAfterActivity : AppCompatActivity() {
                     tab.text = "Customer"
                 }
                 1 -> {
-                    tab.text = "Receipts"
+                    tab.text = "Meals"
                 }
                 2 -> {
-                    tab.text = "Meals"
+                    tab.text = "Receipts"
                 }
             }
         }.attach()

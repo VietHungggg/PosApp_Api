@@ -326,12 +326,12 @@
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Receipts" />
+                        android:text="Meals" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Meals" />
+                        android:text="Receipt" />
 
                 </com.google.android.material.tabs.TabLayout>
 
