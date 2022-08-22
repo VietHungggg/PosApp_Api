@@ -1,6 +1,7 @@
 package com.example.posapp.viewModel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.posapp.db.Customer.Customer
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class CustomerViewModel(private val repository: CustomerRepository) : ViewModel() {
 
-    private var getAllCustomer: LiveData<List<Customer>> =
+    var getAllCustomer: LiveData<List<Customer>> =
         repository.getAllCustomer
 
     fun insertCustomer(customer: Customer) {
