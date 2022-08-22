@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.posapp.api.*
+import com.example.posapp.db.Customer.Customer
 import com.example.posapp.db.MealDatabase
 import com.example.posapp.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch

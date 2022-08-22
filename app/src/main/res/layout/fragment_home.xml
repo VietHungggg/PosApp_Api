@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -38,11 +38,11 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/img_search"
+                    android:id="@+id/img_customer_three_point"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_search" />
+                    android:src="@drawable/ic_three_point" />
 
 
             </LinearLayout>

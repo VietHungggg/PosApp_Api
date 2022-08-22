@@ -19,6 +19,12 @@ class MainActivity : AppCompatActivity() {
         val homeViewModelProviderFactory = HomeViewModelFactory(mealDatabase)
         ViewModelProvider(this, homeViewModelProviderFactory)[HomeViewModel::class.java]
     }
+//
+//    val customerViewModel : CustomerViewModel by lazy {
+//        val mealDatabase = MealDatabase.getInstance(this)
+//        val customerViewModelFactory = CustomerViewModelFactory(mealDatabase)
+//        ViewModelProvider(this , customerViewModelFactory)[CustomerViewModel::class.java]
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

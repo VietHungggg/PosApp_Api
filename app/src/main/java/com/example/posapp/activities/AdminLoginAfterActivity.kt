@@ -42,7 +42,7 @@ class AdminLoginAfterActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = "Users"
+                    tab.text = "Customer"
                 }
                 1 -> {
                     tab.text = "Receipts"

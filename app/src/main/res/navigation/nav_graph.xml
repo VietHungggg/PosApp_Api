@@ -10,6 +10,9 @@
         android:name="com.example.posapp.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addInfoFragment"
+            app:destination="@id/addInfoFragment" />
     </fragment>
 
     <fragment
@@ -23,4 +26,13 @@
         android:name="com.example.posapp.fragments.CartFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/addInfoFragment"
+        android:name="com.example.posapp.fragments.customer.AddInfoFragment"
+        android:label="fragment_add_info"
+        tools:layout="@layout/fragment_add_info" >
+        <action
+            android:id="@+id/action_addInfoFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

@@ -2,23 +2,22 @@ package com.example.posapp.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.posapp.activities.CategoryMealsActivity
-import com.example.posapp.activities.MainActivity
-import com.example.posapp.activities.MealActivity
-import com.example.posapp.activities.StartActivity
+import com.example.posapp.R
+import com.example.posapp.activities.*
 import com.example.posapp.adapters.CategoriesAdapter
 import com.example.posapp.adapters.MostPopularAdapter
 import com.example.posapp.api.MealsByCategory
 import com.example.posapp.api.Meal
 import com.example.posapp.databinding.FragmentHomeBinding
+import com.example.posapp.fragments.customer.AddInfoFragment
 import com.example.posapp.viewModel.HomeViewModel
 
 
@@ -38,6 +37,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        setHasOptionsMenu(true)
+
         super.onCreate(savedInstanceState)
 
         //        homeMvvm = ViewModelProviders.of(this)[HomeViewModel::class.java] (homeMvvm = viewModel)
@@ -56,7 +58,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    //    Event click -> new View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -80,16 +81,40 @@ class HomeFragment : Fragment() {
         observeCategoriesLiveData()
         onCategoryClick()
 
-        //      Home click
-        homeClick()
+        registerForContextMenu(binding.imgCustomerThreePoint)
+
     }
 
-    private fun homeClick() {
-        binding.tvHome.setOnClickListener {
-            val intent = Intent(activity, StartActivity::class.java)
-            startActivity(intent)
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        menu?.add(1, 1, 1, "Add Info")
+        menu?.add(1, 2, 2, "My Info")
+        menu?.add(1, 3, 3, "Log out")
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            1 -> {
+                findNavController().navigate(R.id.action_homeFragment_to_addInfoFragment)
+                return true
+            }
+            2 -> {
+                Toast.makeText(activity, "My info", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            3 -> {
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> return super.onContextItemSelected(item)
         }
     }
+
+    //    Event click -> new View
 
     //    Click into RandomMeal
     private fun onRandomMealClick() {
@@ -171,8 +196,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeCategoriesLiveData() {
-        viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner, Observer { categories ->
-            categoriesAdapter.setCategoriesList(categories)
-        })
+        viewModel.observeCategoriesLiveData()
+            .observe(viewLifecycleOwner, Observer { categories ->
+                categoriesAdapter.setCategoriesList(categories)
+            })
     }
 }

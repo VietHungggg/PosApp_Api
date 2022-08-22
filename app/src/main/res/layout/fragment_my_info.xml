@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.admin.AdminUserFragment"
-    android:background="@color/white">
+    tools:context=".fragments.customer.AddInfoFragment">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="admin user"
+        android:text="Customer my info"
         android:textSize="30sp"/>
 
 </FrameLayout>

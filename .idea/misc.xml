@@ -26,6 +26,8 @@
         <entry key="app/src/main/res/layout/category_click_item.xml" value="0.14488348530901723" />
         <entry key="app/src/main/res/layout/category_items.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/category_meals_item.xml" value="0.296875" />
+        <entry key="app/src/main/res/layout/fragment_add_info.xml" value="0.14488348530901723" />
+        <entry key="app/src/main/res/layout/fragment_admin_customer.xml" value="0.2504528985507246" />
         <entry key="app/src/main/res/layout/fragment_admin_meal.xml" value="0.2427536231884058" />
         <entry key="app/src/main/res/layout/fragment_admin_receipt.xml" value="0.26902173913043476" />
         <entry key="app/src/main/res/layout/fragment_admin_receiptk.xml" value="0.26902173913043476" />
@@ -34,11 +36,13 @@
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_my_info.xml" value="0.2504528985507246" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.13703703703703704" />
         <entry key="app/src/main/res/layout/meals_item.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/popular_items.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/menu/btm_menu.xml" value="0.1890426635742188" />
         <entry key="app/src/main/res/menu/btn_three_point.xml" value="0.24180003978587966" />
+        <entry key="app/src/main/res/menu/btn_three_point_customer.xml" value="0.2828125" />
       </map>
     </option>
   </component>

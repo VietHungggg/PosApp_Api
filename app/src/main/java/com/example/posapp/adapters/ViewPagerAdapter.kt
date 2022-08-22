@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.posapp.fragments.admin.AdminMealFragment
 import com.example.posapp.fragments.admin.AdminReceiptFragment
-import com.example.posapp.fragments.admin.AdminUserFragment
+import com.example.posapp.fragments.admin.AdminCustomerFragment
 
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
@@ -20,7 +20,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
-                AdminUserFragment()
+                AdminCustomerFragment()
             }
             1 -> {
                 AdminReceiptFragment()
