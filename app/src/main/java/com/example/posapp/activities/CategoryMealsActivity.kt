@@ -1,5 +1,6 @@
 package com.example.posapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -24,6 +25,8 @@ class CategoryMealsActivity : AppCompatActivity() {
 //        Prepare Rec
         prepareRecyclerView()
 
+        onItemMealClick()
+
         categoryMealsViewModel = ViewModelProviders.of(this)[CategoryMealsViewModel::class.java]
 
         categoryMealsViewModel.getMealsByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
@@ -35,6 +38,16 @@ class CategoryMealsActivity : AppCompatActivity() {
                 binding.tvCategoryCount.text = "Quantity :  ${mealsList.size.toString()}"
             }
         })
+    }
+
+    private fun onItemMealClick() {
+        categoryMealsAdapter.onItemClick = {
+            val intent = Intent(this, MealActivity::class.java)
+            intent.putExtra(HomeFragment.MEAL_ID, it.idMeal)
+            intent.putExtra(HomeFragment.MEAL_NAME, it.strMeal)
+            intent.putExtra(HomeFragment.MEAL_THUMB, it.strMealThumb)
+            startActivity(intent)
+        }
     }
 
     private fun prepareRecyclerView() {
