@@ -9,7 +9,8 @@ import com.example.posapp.databinding.CategoryItemsBinding
 import java.util.ArrayList
 
 
-class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
+class AdminCategoriesAdapter() :
+    RecyclerView.Adapter<AdminCategoriesAdapter.AdminCategoriesViewHolder>() {
 
     private var categoriesList = ArrayList<Category>()
 
@@ -21,18 +22,16 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
         notifyDataSetChanged()
     }
 
-    inner class CategoryViewHolder(val binding: CategoryItemsBinding) :
+    inner class AdminCategoriesViewHolder(val binding: CategoryItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        return CategoryViewHolder(
-            CategoryItemsBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminCategoriesViewHolder {
+        return AdminCategoriesViewHolder(
+            CategoryItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdminCategoriesViewHolder, position: Int) {
         Glide.with(holder.itemView)
             .load(categoriesList[position].strCategoryThumb)
             .into(holder.binding.imgCategory)
@@ -47,4 +46,5 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
     override fun getItemCount(): Int {
         return categoriesList.size
     }
+
 }
