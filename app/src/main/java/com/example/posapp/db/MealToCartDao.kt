@@ -2,20 +2,17 @@ package com.example.posapp.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.posapp.api.Meal
 import com.example.posapp.api.MealToCart
 
 
 @Dao
 interface MealToCartDao {
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(mealToCart: MealToCart)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateMealCart(mealToCart: MealToCart)
 
     @Delete
-    suspend fun delete (mealToCart: MealToCart)
+    suspend fun deleteMealCart(mealToCart: MealToCart)
 
-//    Save data to favorites
-    @Query ("SELECT * FROM mealsInformation")
-    fun getAllMeals() : LiveData<List<MealToCart>>
-
+    @Query("SELECT * FROM mealToCart")
+    fun getAllMealsCart(): LiveData<List<MealToCart>>
 }

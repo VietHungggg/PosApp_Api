@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.posapp.api.Meal
+import com.example.posapp.api.MealToCart
 import com.example.posapp.databinding.CartItemBinding
 import kotlin.math.cos
 
@@ -16,12 +17,12 @@ class CartMealsAdapter() : RecyclerView.Adapter<CartMealsAdapter.CartMealsAdapte
     inner class CartMealsAdapterViewHolder(val binding: CartItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Meal>() {
-        override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {
+    private val diffUtil = object : DiffUtil.ItemCallback<MealToCart>() {
+        override fun areItemsTheSame(oldItem: MealToCart, newItem: MealToCart): Boolean {
             return oldItem.idMeal == newItem.idMeal
         }
 
-        override fun areContentsTheSame(oldItem: Meal, newItem: Meal): Boolean {
+        override fun areContentsTheSame(oldItem: MealToCart, newItem: MealToCart): Boolean {
             return oldItem == newItem
         }
     }

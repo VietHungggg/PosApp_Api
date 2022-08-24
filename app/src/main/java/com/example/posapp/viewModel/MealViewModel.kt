@@ -11,6 +11,7 @@ import com.example.posapp.api.MealToCart
 import com.example.posapp.api.MealToCartList
 import com.example.posapp.db.MealDatabase
 import com.example.posapp.retrofit.RetrofitInstance
+import com.example.posapp.retrofit.RetrofitInstance2
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +21,9 @@ import retrofit2.Response
 class MealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
 
     private val mealDetailsLiveData = MutableLiveData<Meal>()
+    private val mealToCartDetailsLiveData = MutableLiveData<MealToCart>()
     private val favoritesLiveData = MutableLiveData<List<Meal>>()
+    private val cartLiveData = MutableLiveData<List<MealToCart>>()
 
     fun getMealDetail(id: String) {
         RetrofitInstance.api.getMealDetails(id).enqueue(object : Callback<MealList> {
@@ -36,8 +39,29 @@ class MealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
         })
     }
 
+//    fun getMealToCartDetail(id: String) {
+//        RetrofitInstance2.api.getMealToCartDetails(id).enqueue(object : Callback<MealToCartList> {
+//            override fun onResponse(
+//                call: Call<MealToCartList>,
+//                response: Response<MealToCartList>
+//            ) {
+//                if (response.body() == null) {
+//                    mealToCartDetailsLiveData.value = response.body()!!.mealsToCart[0]
+//                } else return
+//            }
+//
+//            override fun onFailure(call: Call<MealToCartList>, t: Throwable) {
+//                Log.d("MealActivity", t.message.toString())
+//            }
+//        })
+//    }
+
     fun observerMealDetailsLiveData(): LiveData<Meal> {
         return mealDetailsLiveData
+    }
+
+    fun observerMealToCartDetailsLiveData(): LiveData<MealToCart> {
+        return mealToCartDetailsLiveData
     }
 
     fun insertMeal(meal: Meal) {
@@ -55,17 +79,21 @@ class MealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
     //    Meal to Cart
     fun insertMealToCart(mealToCart: MealToCart) {
         viewModelScope.launch {
-            mealDatabase.mealToCartDao().update(mealToCart)
+            mealDatabase.mealToCartDao().updateMealCart(mealToCart)
         }
     }
 
     fun deleteMealToCart(mealToCart: MealToCart) {
         viewModelScope.launch {
-            mealDatabase.mealToCartDao().delete(mealToCart)
+            mealDatabase.mealToCartDao().deleteMealCart(mealToCart)
         }
     }
 
     fun observeFavoritesLiveData(): LiveData<List<Meal>> {
         return favoritesLiveData
+    }
+
+    fun observeCartLiveData(): LiveData<List<MealToCart>> {
+        return cartLiveData
     }
 }

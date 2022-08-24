@@ -49,9 +49,10 @@ class CartFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                viewModel.deleteMeal(cartAdapter.differ.currentList[position])
+                viewModel.deleteMealCart(cartAdapter.differ.currentList[position])
 
-                Snackbar.make(requireView(), "Meal remove from Cart!!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Meal remove from Cart!!", Snackbar.LENGTH_SHORT)
+                    .show()
 //                    .setAction("Undo", View.OnClickListener {
 //                        viewModel.insertMeal(cartAdapter.differ.currentList[position])
 //                    }).show()
@@ -72,8 +73,8 @@ class CartFragment : Fragment() {
     }
 
     private fun observeCart() {
-        viewModel.observeCartMealsLiveData().observe(requireActivity(), Observer { meals ->
-            cartAdapter.differ.submitList(meals)
-        })
+        viewModel.observeCartMealsLiveData().observe(requireActivity()) {
+            cartAdapter.differ.submitList(it)
+        }
     }
 }

@@ -21,7 +21,7 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
-    private var cartMealsLiveData = mealDatabase.mealDao().getAllMeals()
+    private var cartMealsLiveData = mealDatabase.mealToCartDao().getAllMealsCart()
 
     //    Random meal image
     fun getRandomMeal() {
@@ -82,6 +82,13 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
             mealDatabase.mealDao().delete(meal)
         }
     }
+
+    fun deleteMealCart(mealToCart: MealToCart){
+        viewModelScope.launch {
+            mealDatabase.mealToCartDao().deleteMealCart(mealToCart)
+        }
+    }
+
     fun insertMeal(meal: Meal) {
         viewModelScope.launch {
             mealDatabase.mealDao().update(meal)
@@ -105,7 +112,7 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
         return favoritesMealsLiveData
     }
 
-    fun observeCartMealsLiveData(): LiveData<List<Meal>> {
+    fun observeCartMealsLiveData(): LiveData<List<MealToCart>> {
         return cartMealsLiveData
     }
 }

@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "mealToCart")
+
 data class MealToCart(
     val dateModified: Any?,
 

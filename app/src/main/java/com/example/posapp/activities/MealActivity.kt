@@ -1,9 +1,11 @@
 package com.example.posapp.activities
 
 import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -11,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.posapp.R
 import com.example.posapp.api.Meal
+import com.example.posapp.api.MealToCart
 import com.example.posapp.databinding.ActivityMealBinding
 import com.example.posapp.db.MealDatabase
 import com.example.posapp.fragments.HomeFragment
@@ -36,27 +39,36 @@ class MealActivity : AppCompatActivity() {
         val viewModelFactory = MealViewModelFactory(mealDatabase)
         mealMvvm = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
 
-        //mealMvvm = ViewModelProviders.of(this)[MealViewModel::class.java] -- not using RoomDB
-
-
         //Event function
         getMealInformationFromIntent()
         setInformationInView()
 
         loadingCase()
         mealMvvm.getMealDetail(mealId)
+//        mealMvvm.getMealToCartDetail(mealId)
+
         observerMealDetailsLiveData()
+        observerMealToCartDetailLiveData()
 
         //Click function
         onYoutubeImageClick()
-        onFavoriteClick()
         onCartClick()
+        onFavoriteClick()
+    }
+
+    private fun onYoutubeImageClick() {
+        binding.imgYoutube.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
+            startActivity(intent)
+        }
     }
 
     private fun onCartClick() {
         binding.btnChoiceToCart.setOnClickListener {
-            mealToSave?.let {
-                mealMvvm.insertMeal(it)
+            mealToCartSave?.let {
+                Log.d("Tag", it.toString())
+
+                mealMvvm.insertMealToCart(it)
                 Toast.makeText(this, "Meal save to Cart!!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -71,14 +83,8 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun onYoutubeImageClick() {
-        binding.imgYoutube.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
-            startActivity(intent)
-        }
-    }
-
     //    Create var  click to btn favorite and cart
+    private var mealToCartSave: MealToCart? = null
     private var mealToSave: Meal? = null
 
     private fun observerMealDetailsLiveData() {
@@ -93,6 +99,23 @@ class MealActivity : AppCompatActivity() {
                 binding.tvArea.text = "Area : ${meal!!.strArea}"
                 binding.tvInstructionSteep.text = meal.strInstructions
                 youtubeLink = meal.strYoutube.toString()
+            }
+        })
+    }
+
+    private fun observerMealToCartDetailLiveData() {
+        mealMvvm.observerMealToCartDetailsLiveData().observe(this, object : Observer<MealToCart> {
+            override fun onChanged(t: MealToCart?) {
+
+                onResponseCase()
+
+                val mealToCart = t
+                mealToCartSave = mealToCart
+                binding.tvCategory.text = "Category : ${mealToCart!!.strCategory}"
+                binding.tvArea.text = "Area : ${mealToCart!!.strArea}"
+                binding.tvInstructionSteep.text = mealToCart.strInstructions
+                Log.d("Tag", mealToCart.toString())
+                youtubeLink = mealToCart.strYoutube.toString()
             }
         })
     }
@@ -116,6 +139,7 @@ class MealActivity : AppCompatActivity() {
     private fun loadingCase() {
         binding.progressBar.visibility = View.VISIBLE
         binding.btnAddToFav.visibility = View.INVISIBLE
+        binding.btnChoiceToCart.visibility = View.INVISIBLE
         binding.tvArea.visibility = View.INVISIBLE
         binding.tvInstruction.visibility = View.INVISIBLE
         binding.tvCategory.visibility = View.INVISIBLE
@@ -126,6 +150,7 @@ class MealActivity : AppCompatActivity() {
     private fun onResponseCase() {
         binding.progressBar.visibility = View.INVISIBLE
         binding.btnAddToFav.visibility = View.VISIBLE
+        binding.btnChoiceToCart.visibility = View.VISIBLE
         binding.tvArea.visibility = View.VISIBLE
         binding.tvInstruction.visibility = View.VISIBLE
         binding.tvCategory.visibility = View.VISIBLE

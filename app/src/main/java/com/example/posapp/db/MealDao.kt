@@ -3,7 +3,6 @@ package com.example.posapp.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.posapp.api.Meal
-import com.example.posapp.api.MealToCart
 
 
 @Dao
@@ -17,15 +16,5 @@ interface MealDao {
     //    Save data to favorites
     @Query("SELECT * FROM mealsInformation")
     fun getAllMeals(): LiveData<List<Meal>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateMealCart(meal: Meal)
-
-    @Delete
-    suspend fun deleteMealCart(meal: Meal)
-
-    //    Save data to favorites
-    @Query("SELECT * FROM mealsInformation")
-    fun getAllMealsCart(): LiveData<List<Meal>>
 
 }

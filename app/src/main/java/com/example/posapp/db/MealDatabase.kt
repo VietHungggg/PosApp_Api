@@ -16,7 +16,7 @@ import com.example.posapp.fragments.customer.AddInfoFragment
 
 @Database(
     entities = [Meal::class, MealToCart::class, User::class, Customer::class],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(MealTypeConverter::class)
