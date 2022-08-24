@@ -48,7 +48,6 @@ class MealActivity : AppCompatActivity() {
 //        mealMvvm.getMealToCartDetail(mealId)
 
         observerMealDetailsLiveData()
-        observerMealToCartDetailLiveData()
 
         //Click function
         onYoutubeImageClick()
@@ -65,10 +64,18 @@ class MealActivity : AppCompatActivity() {
 
     private fun onCartClick() {
         binding.btnChoiceToCart.setOnClickListener {
-            mealToCartSave?.let {
-                Log.d("Tag", it.toString())
-
-                mealMvvm.insertMealToCart(it)
+            mealToSave?.let {
+                mealMvvm.insertMealToCart(
+                    MealToCart(
+                        it.dateModified,
+                        it.idMeal,
+                        it.strArea,
+                        it.strCategory,
+                        it.strMeal,
+                        it.strMealThumb,
+                        it.strYoutube
+                    )
+                )
                 Toast.makeText(this, "Meal save to Cart!!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -84,7 +91,6 @@ class MealActivity : AppCompatActivity() {
     }
 
     //    Create var  click to btn favorite and cart
-    private var mealToCartSave: MealToCart? = null
     private var mealToSave: Meal? = null
 
     private fun observerMealDetailsLiveData() {
@@ -99,23 +105,6 @@ class MealActivity : AppCompatActivity() {
                 binding.tvArea.text = "Area : ${meal!!.strArea}"
                 binding.tvInstructionSteep.text = meal.strInstructions
                 youtubeLink = meal.strYoutube.toString()
-            }
-        })
-    }
-
-    private fun observerMealToCartDetailLiveData() {
-        mealMvvm.observerMealToCartDetailsLiveData().observe(this, object : Observer<MealToCart> {
-            override fun onChanged(t: MealToCart?) {
-
-                onResponseCase()
-
-                val mealToCart = t
-                mealToCartSave = mealToCart
-                binding.tvCategory.text = "Category : ${mealToCart!!.strCategory}"
-                binding.tvArea.text = "Area : ${mealToCart!!.strArea}"
-                binding.tvInstructionSteep.text = mealToCart.strInstructions
-                Log.d("Tag", mealToCart.toString())
-                youtubeLink = mealToCart.strYoutube.toString()
             }
         })
     }
