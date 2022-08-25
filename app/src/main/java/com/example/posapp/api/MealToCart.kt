@@ -15,5 +15,6 @@ data class MealToCart(
     val strCategory: String?,
     val strMeal: String?,
     val strMealThumb: String?,
-    val strYoutube: String?
-)
+    val strYoutube: String?,
+    val price : String?,
+    )

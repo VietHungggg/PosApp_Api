@@ -65,6 +65,22 @@ class MealActivity : AppCompatActivity() {
     private fun onCartClick() {
         binding.btnChoiceToCart.setOnClickListener {
             mealToSave?.let {
+                val price = when (it.strCategory) {
+                    "Beef" -> 1100
+                    "Chicken" -> 800
+                    "Dessert" -> 700
+                    "Lamb" -> 1200
+                    "Miscellaneous" -> 750
+                    "Pasta" -> 850
+                    "Pork" -> 900
+                    "Seafood" -> 950
+                    "Side" -> 650
+                    "Starter" -> 600
+                    "Vegan" -> 700
+                    "Vegetarian" -> 1000
+                    "Breakfast" -> 700
+                    else -> 800
+            }
                 mealMvvm.insertMealToCart(
                     MealToCart(
                         it.dateModified,
@@ -73,7 +89,8 @@ class MealActivity : AppCompatActivity() {
                         it.strCategory,
                         it.strMeal,
                         it.strMealThumb,
-                        it.strYoutube
+                        it.strYoutube,
+                        price.toString()
                     )
                 )
                 Toast.makeText(this, "Meal save to Cart!!", Toast.LENGTH_SHORT).show()

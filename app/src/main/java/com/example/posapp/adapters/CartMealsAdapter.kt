@@ -36,14 +36,12 @@ class CartMealsAdapter() : RecyclerView.Adapter<CartMealsAdapter.CartMealsAdapte
         )
     }
 
-    val cost = listOf<Int>(800, 850, 900, 950, 1000, 1100, 1200)
-
     override fun onBindViewHolder(holder: CartMealsAdapterViewHolder, position: Int) {
         val meal = differ.currentList[position]
         Glide.with(holder.itemView).load(meal.strMealThumb).into(holder.binding.imgCartItem)
         holder.binding.tvCartItemName.text = meal.strMeal
         holder.binding.tvCartItemCost.text = "Cost :"
-        holder.binding.tvCartItemCost2.text = "${cost.random()} ¥"
+        holder.binding.tvCartItemCost2.text = meal.price
 
     }
 

@@ -11,12 +11,10 @@ import com.example.posapp.db.Customer.Customer
 import com.example.posapp.db.Customer.CustomerDao
 import com.example.posapp.db.User.User
 import com.example.posapp.db.User.UserDao
-import com.example.posapp.fragments.customer.AddInfoFragment
-
 
 @Database(
     entities = [Meal::class, MealToCart::class, User::class, Customer::class],
-    version = 7,
+    version = 11,
     exportSchema = false
 )
 @TypeConverters(MealTypeConverter::class)

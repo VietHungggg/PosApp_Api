@@ -15,4 +15,6 @@ interface MealToCartDao {
 
     @Query("SELECT * FROM mealToCart")
     fun getAllMealsCart(): LiveData<List<MealToCart>>
+
+//    @Query("UPDATE mealToCart")
 }
