@@ -16,5 +16,9 @@ interface MealToCartDao {
     @Query("SELECT * FROM mealToCart")
     fun getAllMealsCart(): LiveData<List<MealToCart>>
 
-//    @Query("UPDATE mealToCart")
+    @Query("UPDATE mealToCart SET price = :price WHERE strCategory = :strCategory ")
+    suspend fun updatePrice(price: String, strCategory: String)
+
+    @Query("SELECT SUM(price) FROM mealToCart")
+    suspend fun sumPrice() : Int
 }

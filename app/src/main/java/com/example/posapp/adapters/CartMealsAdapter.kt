@@ -40,8 +40,8 @@ class CartMealsAdapter() : RecyclerView.Adapter<CartMealsAdapter.CartMealsAdapte
         val meal = differ.currentList[position]
         Glide.with(holder.itemView).load(meal.strMealThumb).into(holder.binding.imgCartItem)
         holder.binding.tvCartItemName.text = meal.strMeal
-        holder.binding.tvCartItemCost.text = "Cost :"
-        holder.binding.tvCartItemCost2.text = meal.price
+        holder.binding.tvCartItemCost.text = "Price :"
+        holder.binding.tvCartItemCost2.text = "${meal.price} ¥"
 
     }
 

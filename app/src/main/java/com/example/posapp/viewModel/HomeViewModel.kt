@@ -16,12 +16,22 @@ import retrofit2.Response
 
 
 class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
-
     private var randomMealLiveData = MutableLiveData<Meal>()
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var cartMealsLiveData = mealDatabase.mealToCartDao().getAllMealsCart()
+    private val priceLiveData = mealDatabase.mealPriceDao().getAllPrice()
+    var sum = MutableLiveData<Int>()
+//
+//    var tax = MutableLiveData<Int>()
+//    var totalPrice = MutableLiveData<Int>()
+
+    init {
+        sum.value = 0
+//        tax.value = 0
+//        totalPrice.value = 0
+    }
 
     //    Random meal image
     fun getRandomMeal() {
@@ -83,21 +93,33 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
         }
     }
 
-    fun deleteMealCart(mealToCart: MealToCart){
+    fun deleteMealCart(mealToCart: MealToCart) {
         viewModelScope.launch {
             mealDatabase.mealToCartDao().deleteMealCart(mealToCart)
         }
     }
 
-    fun insertMeal(meal: Meal) {
+    fun updatePrice(price: String, strCategory: String) {
         viewModelScope.launch {
-            mealDatabase.mealDao().update(meal)
+            mealDatabase.mealToCartDao().updatePrice(price, strCategory)
         }
+    }
+
+
+    fun observerMealPrice(): LiveData<List<MealPrice>> {
+        return priceLiveData
     }
 
     // Observe HomeViewModel
     fun observeRandomMealLivedata(): LiveData<Meal> {
         return randomMealLiveData
+    }
+
+
+    fun sumPrice() {
+        viewModelScope.launch {
+            sum.value = mealDatabase.mealToCartDao().sumPrice()
+        }
     }
 
     fun observePopularItemsLiveData(): LiveData<List<MealsByCategory>> {

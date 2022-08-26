@@ -1,10 +1,12 @@
 package com.example.posapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,18 +52,34 @@ class CartFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 viewModel.deleteMealCart(cartAdapter.differ.currentList[position])
-
-                Snackbar.make(requireView(), "Meal remove from Cart!!", Snackbar.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Meal remove from Cart!!", Toast.LENGTH_SHORT)
                     .show()
-//                    .setAction("Undo", View.OnClickListener {
-//                        viewModel.insertMeal(cartAdapter.differ.currentList[position])
-//                    }).show()
+                sumPrice()
             }
         }
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.recCart)
 
         prepareRecyclerView()
         observeCart()
+        sumPrice()
+
+        viewModel.observerMealPrice().observe(viewLifecycleOwner) {
+            it.forEach {
+                viewModel.updatePrice(it.price, it.strCategory)
+            }
+        }
+    }
+
+    private fun sumPrice() {
+        viewModel.sumPrice()
+        viewModel.sum.observe(requireActivity()) {
+            binding.tvMealPrice2.text = "$it ¥"
+            val tax = (it * 0.1).toInt()
+            val totalPrice = (it + it * 0.1).toInt()
+
+            binding.tvTax2.text = "${tax.toString()} ¥"
+            binding.tvTotalPrice2.text = "${totalPrice.toString()} ¥"
+        }
     }
 
     private fun prepareRecyclerView() {
