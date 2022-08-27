@@ -2,6 +2,9 @@ package com.example.posapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -38,11 +41,16 @@ class CartMealsAdapter() : RecyclerView.Adapter<CartMealsAdapter.CartMealsAdapte
 
     override fun onBindViewHolder(holder: CartMealsAdapterViewHolder, position: Int) {
         val meal = differ.currentList[position]
-        Glide.with(holder.itemView).load(meal.strMealThumb).into(holder.binding.imgCartItem)
-        holder.binding.tvCartItemName.text = meal.strMeal
-        holder.binding.tvCartItemCost.text = "Price :"
-        holder.binding.tvCartItemCost2.text = "${meal.price} ¥"
 
+        if (meal.idMeal == "0") {
+            holder.binding.cvCartItem.isVisible = false
+        } else {
+            Glide.with(holder.itemView).load(meal.strMealThumb).into(holder.binding.imgCartItem)
+            holder.binding.tvCartItemName.text = meal.strMeal
+            holder.binding.tvCartItemCost.text = "Price :"
+            holder.binding.tvCartItemCost2.text = "${meal.price} ¥"
+
+        }
     }
 
     override fun getItemCount(): Int {

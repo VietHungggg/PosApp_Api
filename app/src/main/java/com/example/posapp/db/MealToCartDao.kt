@@ -13,12 +13,10 @@ interface MealToCartDao {
     @Delete
     suspend fun deleteMealCart(mealToCart: MealToCart)
 
-    @Query("SELECT * FROM mealToCart")
+    @Query("SELECT * FROM mealToCart ORDER BY idMeal DESC")
     fun getAllMealsCart(): LiveData<List<MealToCart>>
 
-    @Query("UPDATE mealToCart SET price = :price WHERE strCategory = :strCategory ")
-    suspend fun updatePrice(price: String, strCategory: String)
-
     @Query("SELECT SUM(price) FROM mealToCart")
-    suspend fun sumPrice() : Int
+    suspend fun sumPrice(): Int
+
 }

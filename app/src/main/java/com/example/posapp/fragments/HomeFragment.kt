@@ -83,6 +83,11 @@ class HomeFragment : Fragment() {
 
         registerForContextMenu(binding.imgCustomerThreePoint)
 
+        insertDefault()
+    }
+
+    private fun insertDefault() {
+        viewModel.defaultMeal()
     }
 
     override fun onCreateContextMenu(

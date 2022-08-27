@@ -21,16 +21,10 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var cartMealsLiveData = mealDatabase.mealToCartDao().getAllMealsCart()
-    private val priceLiveData = mealDatabase.mealPriceDao().getAllPrice()
     var sum = MutableLiveData<Int>()
-//
-//    var tax = MutableLiveData<Int>()
-//    var totalPrice = MutableLiveData<Int>()
 
     init {
         sum.value = 0
-//        tax.value = 0
-//        totalPrice.value = 0
     }
 
     //    Random meal image
@@ -87,6 +81,13 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
 
     // Delete meal from Favorite
 
+    fun defaultMeal() {
+        viewModelScope.launch {
+            mealDatabase.mealToCartDao()
+                .updateMealCart(MealToCart("0", "0", "0", "0", "0", "0", "0", "0"))
+        }
+    }
+
     fun deleteMeal(meal: Meal) {
         viewModelScope.launch {
             mealDatabase.mealDao().delete(meal)
@@ -94,20 +95,11 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     }
 
     fun deleteMealCart(mealToCart: MealToCart) {
-        viewModelScope.launch {
-            mealDatabase.mealToCartDao().deleteMealCart(mealToCart)
+        if (mealToCart.idMeal != "0") {
+            viewModelScope.launch {
+                mealDatabase.mealToCartDao().deleteMealCart(mealToCart)
+            }
         }
-    }
-
-    fun updatePrice(price: String, strCategory: String) {
-        viewModelScope.launch {
-            mealDatabase.mealToCartDao().updatePrice(price, strCategory)
-        }
-    }
-
-
-    fun observerMealPrice(): LiveData<List<MealPrice>> {
-        return priceLiveData
     }
 
     // Observe HomeViewModel

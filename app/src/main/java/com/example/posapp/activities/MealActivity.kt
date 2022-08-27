@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.init
 import com.example.posapp.R
 import com.example.posapp.api.Meal
 import com.example.posapp.api.MealToCart
@@ -65,19 +66,40 @@ class MealActivity : AppCompatActivity() {
     private fun onCartClick() {
         binding.btnChoiceToCart.setOnClickListener {
             mealToSave?.let {
-                mealMvvm.insertMealToCart(
-                    MealToCart(
-                        it.dateModified,
-                        it.idMeal,
-                        it.strArea,
-                        it.strCategory,
-                        it.strMeal,
-                        it.strMealThumb,
-                        it.strYoutube,
-                        it.price
+                var price: Int
+                if (it.strCategory?.isEmpty() == true) {
+                    price = 0
+                } else {
+                    price = when (it.strCategory) {
+                        "Beef" -> 1100
+                        "Chicken" -> 800
+                        "Dessert" -> 700
+                        "Lamb" -> 1200
+                        "Miscellaneous" -> 750
+                        "Pasta" -> 850
+                        "Pork" -> 900
+                        "Seafood" -> 950
+                        "Side" -> 650
+                        "Starter" -> 600
+                        "Vegan" -> 700
+                        "Vegetarian" -> 1000
+                        "Breakfast" -> 700
+                        else -> 800
+                    }
+                    mealMvvm.insertMealToCart(
+                        MealToCart(
+                            it.dateModified,
+                            it.idMeal,
+                            it.strArea,
+                            it.strCategory,
+                            it.strMeal,
+                            it.strMealThumb,
+                            it.strYoutube,
+                            price.toString()
+                        )
                     )
-                )
-                Toast.makeText(this, "Meal save to Cart!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Meal save to Cart!!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

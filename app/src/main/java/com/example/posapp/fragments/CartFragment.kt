@@ -62,12 +62,6 @@ class CartFragment : Fragment() {
         prepareRecyclerView()
         observeCart()
         sumPrice()
-
-        viewModel.observerMealPrice().observe(viewLifecycleOwner) {
-            it.forEach {
-                viewModel.updatePrice(it.price, it.strCategory)
-            }
-        }
     }
 
     private fun sumPrice() {
@@ -76,7 +70,6 @@ class CartFragment : Fragment() {
             binding.tvMealPrice2.text = "$it ¥"
             val tax = (it * 0.1).toInt()
             val totalPrice = (it + it * 0.1).toInt()
-
             binding.tvTax2.text = "${tax.toString()} ¥"
             binding.tvTotalPrice2.text = "${totalPrice.toString()} ¥"
         }
