@@ -15,4 +15,7 @@ interface CustomerDao {
 
     @Query("SELECT * FROM customerInformation ORDER BY id ASC")
     fun getAllCustomer(): LiveData<List<Customer>>
+
+    @Query("SELECT MAX(id) FROM customerInformation")
+    suspend fun customerNew() : Int
 }

@@ -19,4 +19,10 @@ interface MealToCartDao {
     @Query("SELECT SUM(price) FROM mealToCart")
     suspend fun sumPrice(): Int
 
+    @Query("SELECT * FROM mealToCart")
+    fun getAllMeal(): Int
+
+    @Query("DELETE FROM mealToCart WHERE idMeal !='0' ")
+    suspend fun deleteResetCart()
+
 }

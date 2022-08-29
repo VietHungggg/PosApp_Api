@@ -20,17 +20,24 @@ import com.example.posapp.databinding.ActivityLoginBinding
 import com.example.posapp.db.MealDatabase
 import com.example.posapp.viewModel.HomeViewModel
 import com.example.posapp.viewModel.HomeViewModelFactory
+import com.example.posapp.viewModel.MealViewModel
+import com.example.posapp.viewModel.MealViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AdminLoginAfterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminLoginAfterBinding
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminLoginAfterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val mealDatabase = MealDatabase.getInstance(this)
+        val viewModelFactory = HomeViewModelFactory(mealDatabase)
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+
 
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout_dashboard)
         val viewPager2 = findViewById<ViewPager2>(R.id.view_pager)
@@ -38,6 +45,21 @@ class AdminLoginAfterActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
 
         viewPager2.adapter = adapter
+
+        viewModel.idMax()
+        viewModel.maxId.observe(this) {
+            binding.tvSaleUpDown.text = it.toString()
+        }
+
+        viewModel.customerNew()
+        viewModel.newCustomer.observe(this) {
+            binding.tvUserUpDown.text = it.toString()
+        }
+
+        viewModel.income()
+        viewModel.income.observe(this) {
+            binding.tvIncomeUpDown.text = "${it.toString()} ¥"
+        }
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {

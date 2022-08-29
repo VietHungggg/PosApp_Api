@@ -37,7 +37,6 @@ class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryM
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgMeal)
         holder.binding.tvMealName.text = mealsList[position].strMeal
-
         holder.itemView.setOnClickListener {
             onItemClick!!.invoke(mealsList[position])
         }

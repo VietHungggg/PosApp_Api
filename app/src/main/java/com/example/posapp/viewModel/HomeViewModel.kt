@@ -8,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.posapp.api.*
 import com.example.posapp.db.Customer.Customer
 import com.example.posapp.db.MealDatabase
+import com.example.posapp.db.ReceiptDetails.ReceiptDetails
+import com.example.posapp.db.receipt.Receipt
 import com.example.posapp.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.nio.channels.MulticastChannel
 
 
 class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
@@ -21,8 +24,11 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var cartMealsLiveData = mealDatabase.mealToCartDao().getAllMealsCart()
+    private var receiptLiveData = mealDatabase.receiptDao().getAllReceipt()
     var sum = MutableLiveData<Int>()
-
+    var maxId = MutableLiveData<Int>()
+    var newCustomer = MutableLiveData<Int>()
+    var income = MutableLiveData<Int>()
     init {
         sum.value = 0
     }
@@ -102,16 +108,60 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
         }
     }
 
-    // Observe HomeViewModel
-    fun observeRandomMealLivedata(): LiveData<Meal> {
-        return randomMealLiveData
+    fun deleteCartReset() {
+        viewModelScope.launch {
+            mealDatabase.mealToCartDao().deleteResetCart()
+        }
     }
 
+    fun idMax() {
+        viewModelScope.launch {
+            maxId.value = mealDatabase.receiptDao().idMax()
+        }
+    }
+
+    fun customerNew(){
+        viewModelScope.launch {
+            newCustomer.value = mealDatabase.customerDao().customerNew()
+        }
+    }
+
+    fun income(){
+        viewModelScope.launch{
+            income.value = mealDatabase.receiptDao().income()
+        }
+    }
 
     fun sumPrice() {
         viewModelScope.launch {
             sum.value = mealDatabase.mealToCartDao().sumPrice()
         }
+    }
+
+    fun insertReceipt(receipt: Receipt) {
+        viewModelScope.launch {
+            mealDatabase.receiptDao().insertReceipt(receipt)
+        }
+    }
+
+    fun insertReceiptDetails(receiptDetails: ReceiptDetails) {
+        viewModelScope.launch {
+            mealDatabase.receiptDetailsDao().insertReceiptDetails(receiptDetails)
+        }
+    }
+
+//    fun deleteCart(){
+//        viewModelScope.launch {
+//            mealDatabase.mealToCartDao().deleteResetCart()
+//        }
+//    }
+
+    fun observerReceiptLiveData(): LiveData<List<Receipt>> {
+        return receiptLiveData
+    }
+
+    fun observeRandomMealLivedata(): LiveData<Meal> {
+        return randomMealLiveData
     }
 
     fun observePopularItemsLiveData(): LiveData<List<MealsByCategory>> {
@@ -129,4 +179,6 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     fun observeCartMealsLiveData(): LiveData<List<MealToCart>> {
         return cartMealsLiveData
     }
+
+
 }
