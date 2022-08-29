@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TableLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -48,19 +49,30 @@ class AdminLoginAfterActivity : AppCompatActivity() {
 
         viewModel.idMax()
         viewModel.maxId.observe(this) {
-            binding.tvSaleUpDown.text = it.toString()
+            if (viewModel.maxId.value != null) {
+                binding.tvSaleUpDown.text = it.toString()
+            } else {
+                binding.tvSaleUpDown.text = "0"
+            }
         }
 
         viewModel.customerNew()
         viewModel.newCustomer.observe(this) {
-            binding.tvUserUpDown.text = it.toString()
+            if (viewModel.newCustomer.value != null) {
+                binding.tvUserUpDown.text = it.toString()
+            } else {
+                binding.tvUserUpDown.text = "0"
+            }
         }
 
         viewModel.income()
         viewModel.income.observe(this) {
-            binding.tvIncomeUpDown.text = "${it.toString()} ¥"
+            if (viewModel.income.value != null) {
+                binding.tvIncomeUpDown.text = "${it.toString()} ¥"
+            } else {
+                binding.tvIncomeUpDown.text = "0"
+            }
         }
-
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
                 0 -> {

@@ -19,7 +19,7 @@ import com.example.posapp.db.receipt.ReceiptDao
 @Database(
     entities = [Meal::class, MealToCart::class, User::class, Customer::class, Receipt::class,
         ReceiptDetails::class],
-    version = 22,
+    version = 25,
     exportSchema = false
 )
 @TypeConverters(MealTypeConverter::class)
