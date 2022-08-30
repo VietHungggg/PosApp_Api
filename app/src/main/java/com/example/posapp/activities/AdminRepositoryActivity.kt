@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.posapp.R
 import com.example.posapp.adapters.AdminCategoriesAdapter
 import com.example.posapp.adapters.CategoryMealsAdapter
+import com.example.posapp.adapters.CategoryMealsAdapter2
 import com.example.posapp.databinding.ActivityAdminRepositoryBinding
 import com.example.posapp.databinding.CategoryItemsBinding
 import com.example.posapp.fragments.admin.AdminMealFragment
@@ -17,7 +18,7 @@ class AdminRepositoryActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAdminRepositoryBinding
     lateinit var viewModel: CategoryMealsViewModel
-    lateinit var categoriesAdapter: CategoryMealsAdapter
+    lateinit var categoriesAdapter: CategoryMealsAdapter2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class AdminRepositoryActivity : AppCompatActivity() {
     }
 
     private fun prepareRecyclerView() {
-        categoriesAdapter = CategoryMealsAdapter()
+        categoriesAdapter = CategoryMealsAdapter2()
         binding.recMeals.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = categoriesAdapter
